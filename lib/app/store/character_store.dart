@@ -16,10 +16,10 @@ class CharacterStore extends ValueNotifier<CharacterState> {
   void getCharacters() async {
     await repository.getCharacters(page: page).then((resposta) {
       resposta.fold(
-        (lula) => value = CharacterError(lula.message),
-        (bolsonaro) {
-          originalCharacters = bolsonaro;
-          value = CharacterLoaded(bolsonaro);
+        (left) => value = CharacterError(left.message),
+        (rigth) {
+          originalCharacters = rigth;
+          value = CharacterLoaded(rigth);
         },
       );
     });
@@ -35,9 +35,9 @@ class CharacterStore extends ValueNotifier<CharacterState> {
 
       repository.getCharacters(page: page).then((resposta) {
         resposta.fold(
-          (lula) => value = CharacterError(lula.message),
-          (bolsonaro) {
-            originalCharacters.addAll(bolsonaro);
+          (left) => value = CharacterError(left.message),
+          (rigth) {
+            originalCharacters.addAll(rigth);
             value = CharacterLoaded(originalCharacters);
           },
         );
